@@ -30,6 +30,24 @@ const routes = [
         name: 'profile-edit',
         component: () => import('@/components/ProfileEditForm.vue'),
         meta: { requiresAuth: true }
+    },
+    {
+        path: '/personnel',
+        name: 'personnel',
+        component: () => import('@/components/PersonnelView.vue'),
+        meta: { requiresAuth: true , requiresPersonnel: true}
+    },
+    {
+        path: '/provider',
+        name: 'provider',
+        component: () => import('@/components/ProviderView.vue'),
+        meta: { requiresAuth: true , requiresProvider: true}
+    },
+    {
+        path: '/customer',
+        name: 'customer',
+        component: () => import('@/components/CustomerView.vue'),
+        meta: { requiresAuth: true , requiresCustomer: true},
     }
 ]
 
@@ -46,6 +64,13 @@ router.beforeEach((to, from, next) => {
     } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
         next('/profile')
     } else {
+        if (to.meta.requiresPersonnel && !authStore.isPersonnel) {
+            next('/profile')
+        } else if (to.meta.requiresProvider && !authStore.isProvider) {
+            next('/profile')
+        } else if (to.meta.requiresCustomer && !authStore.isCustomer) {
+            next('/profile')
+        }
         next()
     }
 })

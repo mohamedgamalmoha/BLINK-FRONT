@@ -15,6 +15,24 @@
       >
         Profile
       </v-btn>
+      <v-btn v-if="isPersonnel"
+             :to="{ name: 'provider' }"
+             text
+      >
+        Provider
+      </v-btn>
+      <v-btn v-if="isProvider"
+          :to="{ name: 'personnel' }"
+          text
+      >
+        Personnel
+      </v-btn>
+      <v-btn v-if="isCustomer"
+             :to="{ name: 'customer' }"
+             text
+      >
+        Customer
+      </v-btn>
       <v-btn
           @click="logout"
           text
@@ -45,6 +63,9 @@ import { useAuthStore } from '@/store/auth'
 
 const authStore = useAuthStore()
 const isAuthenticated = computed(() => authStore.isAuthenticated)
+const isPersonnel = computed(() => authStore.isPersonnel)
+const isProvider = computed(() => authStore.isProvider)
+const isCustomer = computed(() => authStore.isCustomer)
 
 const logout = () => {
   authStore.logout()
