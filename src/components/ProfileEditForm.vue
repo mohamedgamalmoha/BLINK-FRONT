@@ -119,6 +119,7 @@ const onSubmit = async () => {
     notify('Profile updated successfully!')
     await authStore.fetchCurrentUser(true)
     router.push({ name: 'profile' })
+    window.location.reload()
   } catch (err) {
     error.value = err.message || 'Failed to update profile'
   } finally {

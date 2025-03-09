@@ -35,23 +35,12 @@
             :rules="[rules.required, rules.email]"
         />
 
-        <v-radio-group
+        <v-select
             v-model="role"
             label="Account Type"
+            :items="roleOptions"
             :rules="[rules.required]"
-            row
-        >
-          <v-radio
-              color="primary"
-              label="Provider"
-              :value=2
-          ></v-radio>
-          <v-radio
-              color="primary"
-              label="Customer"
-              :value=3
-          ></v-radio>
-        </v-radio-group>
+        />
 
         <v-text-field
             v-model="password"
@@ -111,11 +100,15 @@ const notify = inject('notify')
 
 const form = ref(null)
 const valid = ref(false)
-const username = ref('') // New field
-const firstName = ref('') // New field
-const lastName = ref('') // New field
+const username = ref('')
+const firstName = ref('')
+const lastName = ref('')
 const email = ref('')
-const role = ref(3) // Default to Customer (4)
+const role = ref(3) // Default to Customer (3)
+const roleOptions = [
+  { title: 'Provider', value: 2 },
+  { title: 'Customer', value: 3 }
+]
 const password = ref('')
 const confirmPassword = ref('')
 const showPassword = ref(false)
@@ -140,8 +133,6 @@ const onSubmit = async () => {
   error.value = ''
 
   try {
-    console.log(role.value)
-    console.log(typeof role.value)
     await authStore.register({
       username: username.value,
       first_name: firstName.value,
@@ -152,6 +143,7 @@ const onSubmit = async () => {
     })
     notify('Registration successful!')
     router.push({ name: 'profile' })
+    window.location.reload();
   } catch (err) {
     error.value = err.message || 'Registration failed'
   } finally {

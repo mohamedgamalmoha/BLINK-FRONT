@@ -131,6 +131,8 @@ const onSubmit = async () => {
     success.value = 'Fund added successfully!'
     notify('Fund added successfully!')
     resetForm()
+    router.push('/provider')
+    window.location.reload()
   } catch (err) {
     console.error(err)
     error.value = err.response?.data?.message || 'Failed to add fund'

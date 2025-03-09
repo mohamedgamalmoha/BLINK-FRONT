@@ -210,6 +210,8 @@ const onSubmit = async () => {
 
     success.value = 'Loan product updated successfully!'
     notify('Loan product updated successfully!')
+    router.push('/personnel')
+    window.location.reload()
   } catch (err) {
     console.error(err)
     error.value = err.response?.data?.message || 'Failed to update loan product'

@@ -147,6 +147,8 @@ const onSubmit = async () => {
     success.value = 'Loan added successfully!'
     notify('Loan added successfully!')
     resetForm()
+    router.push('/customer')
+    window.location.reload()
   } catch (err) {
     console.error(err)
     error.value = err.response?.data?.message || 'Failed to add loan'

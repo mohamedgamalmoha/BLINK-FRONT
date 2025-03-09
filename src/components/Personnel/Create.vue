@@ -162,6 +162,8 @@ const onSubmit = async () => {
     success.value = 'Loan product added successfully!'
     notify('Loan product added successfully!')
     resetForm()
+    router.push('/personnel')
+    window.location.reload()
   } catch (err) {
     console.error(err)
 

@@ -197,6 +197,8 @@ const onSubmit = async () => {
 
     success.value = 'Fund updated successfully!'
     notify('Fund updated successfully!')
+    router.push('/provider')
+    window.location.reload()
   } catch (err) {
     console.error(err)
     error.value = err.response?.data?.message || 'Failed to update fund'
