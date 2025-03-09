@@ -58,6 +58,7 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/auth'
+import { nextTick } from 'vue';
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -88,7 +89,9 @@ const onSubmit = async () => {
       password: password.value
     })
     notify('Login successful!')
+    await nextTick()
     router.push('/profile')
+    // window.location.reload();
   } catch (err) {
     error.value = err.message || 'Login failed'
   } finally {

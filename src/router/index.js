@@ -19,6 +19,7 @@ const routes = [
         component: () => import('@/components/RegisterForm.vue'),
         meta: { requiresGuest: true }
     },
+    /* Profile Routes */
     {
         path: '/profile',
         name: 'profile',
@@ -31,23 +32,62 @@ const routes = [
         component: () => import('@/components/ProfileEditForm.vue'),
         meta: { requiresAuth: true }
     },
+    /* Personnel Routes */
     {
         path: '/personnel',
         name: 'personnel',
-        component: () => import('@/components/PersonnelView.vue'),
-        meta: { requiresAuth: true , requiresPersonnel: true}
+        component: () => import('@/components/Personnel/List.vue'),
+        meta: { requiresAuth: true , requiresPersonnel: true }
     },
+    {
+        path: '/personnel/create',
+        name: 'personnel-create',
+        component: () => import('@/components/Personnel/Create.vue'),
+        meta: { requiresAuth: true , requiresPersonnel: true }
+    },
+    {
+        path: '/personnel/:id/edit',
+        name: 'personnel-edit',
+        component: () => import('@/components/Personnel/Update.vue'),
+        meta: { requiresAuth: true , requiresPersonnel: true }
+    },
+    /* Provider Routes */
     {
         path: '/provider',
         name: 'provider',
-        component: () => import('@/components/ProviderView.vue'),
-        meta: { requiresAuth: true , requiresProvider: true}
+        component: () => import('@/components/Provider/List.vue'),
+        meta: { requiresAuth: true , requiresProvider: true }
     },
+    {
+        path: '/provider/create',
+        name: 'provider-create',
+        component: () => import('@/components/Provider/Create.vue'),
+        meta: { requiresAuth: true , requiresProvider: true }
+    },
+    {
+        path: '/provider/:id/edit',
+        name: 'provider-edit',
+        component: () => import('@/components/Provider/Update.vue'),
+        meta: { requiresAuth: true , requiresProvider: true }
+    },
+    /* Provider Routes */
     {
         path: '/customer',
         name: 'customer',
-        component: () => import('@/components/CustomerView.vue'),
-        meta: { requiresAuth: true , requiresCustomer: true},
+        component: () => import('@/components/Customer/List.vue'),
+        meta: { requiresAuth: true , requiresCustomer: true },
+    },
+    {
+        path: '/customer/create',
+        name: 'customer-create',
+        component: () => import('@/components/Customer/Create.vue'),
+        meta: { requiresAuth: true , requiresCustomer: true }
+    },
+    {
+        path: '/customer/:id/edit',
+        name: 'customer-edit',
+        component: () => import('@/components/Customer/Update.vue'),
+        meta: { requiresAuth: true , requiresCustomer: true }
     }
 ]
 
@@ -70,8 +110,9 @@ router.beforeEach((to, from, next) => {
             next('/profile')
         } else if (to.meta.requiresCustomer && !authStore.isCustomer) {
             next('/profile')
+        } else {
+            next()
         }
-        next()
     }
 })
 

@@ -16,16 +16,16 @@
         Profile
       </v-btn>
       <v-btn v-if="isPersonnel"
-             :to="{ name: 'provider' }"
+             :to="{ name: 'personnel' }"
              text
       >
-        Provider
+        Personnel
       </v-btn>
       <v-btn v-if="isProvider"
-          :to="{ name: 'personnel' }"
+          :to="{ name: 'provider' }"
           text
       >
-        Personnel
+        Provider
       </v-btn>
       <v-btn v-if="isCustomer"
              :to="{ name: 'customer' }"
@@ -69,5 +69,6 @@ const isCustomer = computed(() => authStore.isCustomer)
 
 const logout = () => {
   authStore.logout()
+  window.location.reload();
 }
 </script>
